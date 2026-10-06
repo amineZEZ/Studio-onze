@@ -5,12 +5,12 @@ export function Nav() {
   return (
     <div className="wrap">
       <nav aria-label="Navigation principale">
-        <Link className="brand" href="/" aria-label={`${site.name}, accueil`}>keyframe<i className="kd" aria-hidden="true" /></Link>
+        <Link className="brand" href="/" aria-label={`${site.name}, accueil`}>au pixel près<i className="kd" aria-hidden="true" /></Link>
         <div className="links">
           <Link href="/#travaux">Réalisations</Link>
           <Link href="/#offres">Offres</Link>
           <Link href="/#methode">Méthode</Link>
-          <Link className="btn primary" href="/#devis">Demander un devis</Link>
+          <Link className="btn primary" href="/#devis"><span className="hide-s">Demander un devis</span><span className="show-s">Devis</span></Link>
         </div>
       </nav>
     </div>

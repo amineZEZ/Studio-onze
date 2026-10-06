@@ -4,7 +4,7 @@ import { devisEmail, parseDevis } from "@/lib/devis";
 /**
  * Reçoit une demande de devis et l'envoie par email au studio (Resend).
  * Rien n'est stocké. Clés à mettre dans Vercel (jamais sur GitHub) :
- * RESEND_API_KEY, DEVIS_TO (ton email), DEVIS_FROM (facultatif, ex. « Studio Keyframe <devis@ton-domaine.fr> »).
+ * RESEND_API_KEY, DEVIS_TO (ton email), DEVIS_FROM (facultatif, ex. « Au Pixel Près <devis@ton-domaine.fr> »).
  */
 
 // Limite simple contre les abus : 5 demandes par adresse IP et par heure (par instance du serveur).
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: process.env.DEVIS_FROM?.trim() || "Studio Keyframe <onboarding@resend.dev>",
+      from: process.env.DEVIS_FROM?.trim() || "Au Pixel Près <onboarding@resend.dev>",
       to: [to],
       reply_to: parsed.data.email,
       ...mail,
