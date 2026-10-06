@@ -1,12 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, JetBrains_Mono, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Cursor } from "@/components/fx/Cursor";
+import { SmoothScroll } from "@/components/fx/SmoothScroll";
+import { archivo, silkscreen } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import "./globals.css";
-
-const syne = Syne({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-syne", display: "swap" });
-const figtree = Figtree({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-figtree", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -19,17 +17,14 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION?.trim() ? { google: process.env.GOOGLE_SITE_VERIFICATION.trim() } : undefined,
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F1F2F6" },
-    { media: "(prefers-color-scheme: dark)", color: "#0D0F1D" },
-  ],
-};
+export const viewport: Viewport = { themeColor: "#F2F2EF", colorScheme: "light" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${syne.variable} ${figtree.variable} ${mono.variable}`}>
+    <html lang="fr" className={`${archivo.variable} ${silkscreen.variable}`}>
       <body>
+        <SmoothScroll />
+        <Cursor />
         {children}
         <Analytics />
       </body>
