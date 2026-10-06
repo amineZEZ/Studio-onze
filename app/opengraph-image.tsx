@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Studio Onze · Logo, motion design et sites internet";
+export const alt = "Studio Keyframe · Logo, motion design et sites internet";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,7 +10,7 @@ export default function OG() {
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 72, background: "#121426", color: "#F1F2F6", fontFamily: "sans-serif" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div style={{ width: 64, height: 64, borderRadius: 18, background: "#3340F5" }} />
-          <div style={{ fontSize: 56, fontWeight: 800, display: "flex" }}>onze<span style={{ color: "#FF6A3D" }}>.</span></div>
+          <div style={{ fontSize: 56, fontWeight: 800, display: "flex" }}>keyframe<span style={{ width: 22, height: 22, background: "#FF6A3D", transform: "rotate(45deg)", marginLeft: 10, marginTop: 14 }} /></div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1, display: "flex", flexWrap: "wrap" }}>

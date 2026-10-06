@@ -5,7 +5,7 @@ export function Nav() {
   return (
     <div className="wrap">
       <nav aria-label="Navigation principale">
-        <Link className="brand" href="/" aria-label={`${site.name}, accueil`}>onze<i>.</i></Link>
+        <Link className="brand" href="/" aria-label={`${site.name}, accueil`}>keyframe<i className="kd" aria-hidden="true" /></Link>
         <div className="links">
           <Link href="/#travaux">Réalisations</Link>
           <Link href="/#offres">Offres</Link>

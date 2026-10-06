@@ -1,12 +1,12 @@
-/** Contenus du site Studio Onze : tout le texte modifiable est ici. */
+/** Contenus du site Studio Keyframe : tout le texte modifiable est ici. */
 
 const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "";
 
 export const site = {
-  name: "Studio Onze",
+  name: "Studio Keyframe",
   /** Adresse du site : NEXT_PUBLIC_SITE_URL quand le nom de domaine sera branché, sinon l'adresse Vercel. */
   url: (process.env.NEXT_PUBLIC_SITE_URL?.trim() || vercelUrl || "http://localhost:3000").replace(/\/$/, ""),
-  title: "Studio Onze · Logo, motion design et sites internet",
+  title: "Studio Keyframe · Logo, motion design et sites internet",
   description:
     "Studio créatif : logo, vidéos animées pour TikTok et Reels, sites internet et SaaS sur mesure. Devis gratuit sous 48 h.",
 };

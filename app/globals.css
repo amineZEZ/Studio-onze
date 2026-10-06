@@ -145,3 +145,9 @@ footer{border-top:1px solid var(--line);padding-block:32px 48px;display:flex;fle
 .legal h2{font-size:1.4rem;margin-top:12px}
 .legal p,.legal li{color:var(--muted)}
 .todo{background:var(--key);color:#1B0E08;border-radius:6px;padding:1px 6px;font-weight:600}
+/* Losange = « image-clé » (keyframe) des logiciels d'animation : signe du logo. */
+.kd{display:inline-block;width:.3em;height:.3em;background:var(--key);transform:rotate(45deg);margin-left:.14em;vertical-align:.05em}
+.word{font-size:clamp(1.5rem,6.5vw,2.4rem);white-space:nowrap}
+.brand{white-space:nowrap}
+@media (max-width:420px){.brand{font-size:1.3rem}.links .btn{padding:10px 14px;font-size:.85rem}}
+.shape{width:clamp(40px,10vw,64px);height:clamp(40px,10vw,64px)}

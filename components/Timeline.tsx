@@ -28,12 +28,12 @@ export function Timeline() {
   );
 
   return (
-    <div className="edit" role="img" aria-label="Animation : le logo Studio Onze se construit sur une timeline de montage">
+    <div className="edit" role="img" aria-label="Animation : le logo Studio Keyframe se construit sur une timeline de montage">
       <div className="stage">
         <span className="tc" ref={tc}>00:00:00:00</span>
         <span className="res">1080 × 1920 · 30 i/s</span>
         <div className="safe" />
-        <div className="logo"><div className="shape" /><div className="word">onze<i>.</i></div></div>
+        <div className="logo"><div className="shape" /><div className="word">keyframe<i className="kd" aria-hidden="true" /></div></div>
       </div>
       <div className="tl">
         {track("Forme", [0, 96], [4, 15, 55, 80])}
