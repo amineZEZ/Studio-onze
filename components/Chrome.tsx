@@ -16,6 +16,7 @@ export function Nav() {
       <nav className="links" aria-label="Navigation principale">
         <Link href="/#services">Services</Link>
         <Link href="/#travaux">Travaux</Link>
+        <Link href="/#demos">Démos</Link>
         <Link href="/#offres">Prix</Link>
         <Link className="btn btn-ink" href="/#devis" data-magnetic data-cursor="Go"><span className="hide-s">Demander un devis</span><span className="show-s">Devis</span></Link>
       </nav>
@@ -31,6 +32,7 @@ export function Footer() {
         <ul className="foot-links">
           <li><Link href="/#services">Services</Link></li>
           <li><Link href="/#travaux">Travaux</Link></li>
+          <li><Link href="/#demos">Démos</Link></li>
           <li><Link href="/#offres">Prix</Link></li>
           <li><Link href="/mentions-legales">Mentions légales</Link></li>
           <li><Link href="/confidentialite">Confidentialité</Link></li>

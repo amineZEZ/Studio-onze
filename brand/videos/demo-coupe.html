@@ -1,0 +1,98 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/all.css">
+<style>
+/* Vidéo démo « Coupe Franche » (marque imaginaire) — 1080 × 1920, 12 s. */
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0C0C0C}
+body{font-family:'Barlow',sans-serif;color:#EDE8DF}
+.L{position:absolute;inset:0;overflow:hidden;opacity:0}
+.ph{position:absolute;inset:-5%;background-size:cover;background-position:center;filter:grayscale(.85) contrast(1.15) brightness(.55)}
+.stack{position:absolute;left:70px;right:100px;top:560px;font:900 250px/.84 'Big Shoulders',Impact,sans-serif;text-transform:uppercase}
+.stack div{transform-origin:left bottom}
+.red{color:#C8102E}
+.pole{position:absolute;left:0;right:0;height:70px;background:repeating-linear-gradient(-45deg,#C8102E 0 40px,#EDE8DF 40px 80px,#1F3A93 80px 120px,#EDE8DF 120px 160px);background-size:226px 70px}
+.phone{position:absolute;left:50%;top:250px;width:600px;height:1232px;margin-left:-300px;border-radius:78px;background:#161616;padding:16px;box-shadow:0 0 0 3px #333,0 0 0 14px #1c1c1c,0 80px 140px -30px rgba(200,16,46,.5)}
+.screen{position:relative;width:100%;height:100%;border-radius:64px;overflow:hidden;background:#EDE8DF}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0}
+.tap{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:rgba(200,16,46,.3);border:6px solid #fff;opacity:0}
+.side{position:absolute;left:0;right:0;top:1560px;text-align:center;font:900 140px/.9 'Big Shoulders',sans-serif;text-transform:uppercase}
+.side span{color:#C8102E}
+.stamp{position:absolute;left:50%;top:50%;font:900 230px/1 'Big Shoulders',sans-serif;color:#C8102E;border:16px solid #C8102E;padding:10px 50px 0;border-radius:26px;text-transform:uppercase;transform:translate(-50%,-50%) rotate(-10deg);background:rgba(12,12,12,.35)}
+.endLogo{position:absolute;left:0;right:0;top:640px;text-align:center;font:900 250px/.84 'Big Shoulders',sans-serif;text-transform:uppercase}
+.vpole{position:absolute;left:50%;top:330px;width:60px;height:250px;margin-left:-30px;border-radius:30px;background:repeating-linear-gradient(-45deg,#C8102E 0 30px,#fff 30px 60px,#1F3A93 60px 90px,#fff 90px 120px);background-size:60px 170px;box-shadow:0 0 0 10px #222}
+.endSub{position:absolute;left:0;right:0;top:1230px;text-align:center;font:600 50px 'Barlow';color:#D9D2C5}
+.endCta{position:absolute;left:50%;top:1380px;transform:translateX(-50%);background:#C8102E;color:#fff;font:900 64px 'Big Shoulders';text-transform:uppercase;padding:26px 60px;border-radius:24px;white-space:nowrap;letter-spacing:.03em}
+.demo{position:absolute;left:0;right:0;bottom:120px;text-align:center;font:500 28px 'Barlow';color:#8E8A83}
+.flash{position:absolute;inset:0;background:#EDE8DF;opacity:0;pointer-events:none}
+</style></head><body>
+
+<div class="L" id="A"><div class="ph" id="Aph" style="background-image:url(../../public/demos/coupe-franche/coupe.jpg)"></div>
+  <div class="pole" id="Apole" style="top:420px"></div>
+  <div class="stack"><div id="w1">Ta</div><div id="w2">coupe.</div><div id="w3" class="red">Sans</div><div id="w4" class="red">appeler.</div></div>
+</div>
+
+<div class="L" id="B">
+  <div class="phone" id="phone"><div class="screen">
+    <img id="s0" src="assets/app-0.png"><img id="s1" src="assets/app-1.png"><img id="s2" src="assets/app-2.png"><img id="s3" src="assets/app-3.png"><img id="s4" src="assets/app-4.png"><img id="s5" src="assets/app-5.png"><img id="s6" src="assets/app-6.png">
+    <div class="tap" id="tap"></div>
+  </div></div>
+  <p class="side" id="side"></p>
+</div>
+
+<div class="L" id="C"><div class="ph" id="Cph" style="background-image:url(../../public/demos/coupe-franche/rasage.jpg)"></div>
+  <div class="stamp" id="stamp">Réservé</div>
+</div>
+
+<div class="L" id="D">
+  <div class="vpole" id="vpole"></div>
+  <div class="endLogo" id="endLogo">Coupe<br><span style="color:#C8102E">Franche</span></div>
+  <p class="endSub" id="endSub">Barbier · Paris 11e</p>
+  <div class="endCta" id="endCta">Réserve en 30 s</div>
+  <p class="demo">Démo · marque imaginaire · application réalisée par Au Pixel Près</p>
+</div>
+<div class="flash" id="flash"></div>
+
+<script>
+window.DUR = 12;
+const $ = (id) => document.getElementById(id);
+const cl = (x) => Math.max(0, Math.min(1, x));
+const eo = (x) => 1 - Math.pow(1 - cl(x), 4);
+const back = (x) => { x = cl(x); const c = 2.2; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const SC = { A: [0, 2.4], B: [2.4, 8.4], C: [8.4, 10.0], D: [10.0, 12.01] };
+function vis(id, t) { const [a, b] = SC[id]; const on = t >= a && t < b; $(id).style.opacity = on ? 1 : 0; return on ? t - a : null; }
+// Écrans de l'application (captures réelles de la démo) et position du « tap » sur chaque écran (en px dans l'écran 568 × 1200).
+const cuts = [0, 0.8, 1.6, 2.4, 3.3, 4.1, 4.9];
+const taps = [[284, 882], [284, 411], [142, 497], [170, 223], [284, 716], [284, 685]];
+const words = [[0, "4 étapes."], [2.4, "<span>0</span> appel."], [4.9, "<span>30</span> secondes."]];
+
+window.render = function (t) {
+  let u;
+  if ((u = vis("A", t)) !== null) {
+    $("Aph").style.transform = `scale(${1.15 - u * .05})`;
+    ["w1", "w2", "w3", "w4"].forEach((w, i) => { const k = (u - .15 - i * .32) / .35; $(w).style.opacity = k > 0 ? 1 : 0; $(w).style.transform = `scale(${k > 0 ? 1 + (1 - eo(k)) * .5 : 1}) translateY(${(1 - eo(k)) * 30}px)`; });
+    $("Apole").style.backgroundPosition = `${u * 300}px 0`; $("Apole").style.transform = `scaleX(${eo(u / .5)})`;
+  }
+  if ((u = vis("B", t)) !== null) {
+    $("phone").style.transform = `translateY(${(1 - back(u / .7)) * 1100}px)`;
+    cuts.forEach((c, i) => { const n = cuts[i + 1] ?? 99; $("s" + i).style.opacity = u >= c + .45 && u < n + .45 + .2 ? cl((u - c - .45) / .18) : 0; });
+    const tp = $("tap"); tp.style.opacity = 0;
+    taps.forEach(([x, y], i) => { const k = (u - (cuts[i + 1] + .45 - .3)) / .3; if (k >= 0 && k <= 1) { tp.style.left = x + "px"; tp.style.top = y + "px"; tp.style.opacity = 1 - k; tp.style.transform = `scale(${.6 + k * .7})`; } });
+    const w = [...words].reverse().find(([a]) => u >= a + .4); const sd = $("side");
+    if (w) { if (sd.dataset.k !== w[1]) { sd.innerHTML = w[1]; sd.dataset.k = w[1]; } const k = (u - w[0] - .4) / .3; sd.style.opacity = 1; sd.style.transform = `scale(${1 + (1 - eo(k)) * .35})`; } else sd.style.opacity = 0;
+  }
+  if ((u = vis("C", t)) !== null) {
+    $("Cph").style.transform = `scale(${1.05 + u * .04})`;
+    const k = (u - .25) / .35; $("stamp").style.opacity = k > 0 ? 1 : 0; $("stamp").style.transform = `translate(-50%,-50%) rotate(-10deg) scale(${k > 0 ? 1 + (1 - eo(k)) * 1.6 : 2})`;
+  }
+  if ((u = vis("D", t)) !== null) {
+    $("vpole").style.backgroundPosition = `0 ${u * 220}px`; $("vpole").style.transform = `scaleY(${eo(u / .5)})`;
+    $("endLogo").style.opacity = eo((u - .15) / .3); $("endLogo").style.transform = `translateY(${(1 - eo((u - .15) / .6)) * 60}px)`;
+    $("endSub").style.opacity = eo((u - .5) / .3);
+    $("endCta").style.transform = `translateX(-50%) scale(${back((u - .7) / .45)})`;
+  }
+  // Flash blanc très court aux coupes (effet « clac » de tondeuse)
+  let f = 0; for (const c of [2.4, 8.4, 10.0]) { const k = (t - c) / .12; if (k >= 0 && k <= 1) f = (1 - k) * .55; }
+  $("flash").style.opacity = f;
+};
+render(0);
+</script></body></html>

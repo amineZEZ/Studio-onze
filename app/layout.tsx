@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Cursor } from "@/components/fx/Cursor";
-import { SmoothScroll } from "@/components/fx/SmoothScroll";
 import { archivo, silkscreen } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -23,8 +21,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${archivo.variable} ${silkscreen.variable}`}>
       <body>
-        <SmoothScroll />
-        <Cursor />
         {children}
         <Analytics />
       </body>

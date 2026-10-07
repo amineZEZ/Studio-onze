@@ -52,3 +52,11 @@ export const legal = {
 };
 
 export const formatPrice = (n: number) => `${new Intl.NumberFormat("fr-FR").format(n).replace(/ | /g, " ")} €`;
+
+/** Projets de démonstration (marques imaginaires) : de vrais sites et applications qui fonctionnent. */
+export const demos = [
+  { slug: "odette", name: "Fournil Odette", kind: "Site vitrine", text: "Boulangerie : fournées du jour en direct, carte, commande à emporter avec choix de l'heure.", video: "/video/demos/odette.mp4", poster: "/video/demos/odette.jpg", color: "#E9B44C" },
+  { slug: "coupe-franche", name: "Coupe Franche", kind: "Application", text: "Barbier : réservation en 4 étapes, créneaux libres en temps réel, confirmation.", video: "/video/demos/coupe.mp4", poster: "/video/demos/coupe.jpg", color: "#C8102E" },
+  { slug: "rythme", name: "Rythme", kind: "SaaS", text: "Logiciel pour coachs sportifs : chiffre d'affaires, planning, clients, ajout de séances.", image: "/demos/rythme/apercu.jpg", color: "#E8492A" },
+  { slug: "mona", name: "Glaces Mona", kind: "Identité visuelle", text: "Glacier : logo, déclinaisons, couleurs, typographies, packaging et animation du logo.", video: "/video/demos/mona.mp4", poster: "/video/demos/mona.jpg", color: "#FF8FAB" },
+];

@@ -1,0 +1,119 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/all.css">
+<style>
+/* Vidéo démo « Glaces Mona » (marque imaginaire) : animation du logo — 1080 × 1920, 10 s. */
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#FFD3DE}
+body{font-family:'Bricolage Grotesque',sans-serif;color:#4A2C21}
+.L{position:absolute;inset:0;overflow:hidden;opacity:0}
+#logo{position:absolute;left:50%;top:330px;width:620px;margin-left:-310px;overflow:visible}
+.g{fill:none;stroke:#C2456A;stroke-width:.4}
+.word{position:absolute;left:0;right:0;top:1150px;text-align:center;font:400 260px/1 'Bagel Fat One',sans-serif;letter-spacing:-.02em}
+.word span{display:inline-block}
+.flav{position:absolute;left:0;right:0;top:1470px;text-align:center;font:700 64px 'Bricolage Grotesque'}
+.flav b{display:inline-block;background:#4A2C21;color:#FFF4DC;padding:10px 36px;border-radius:99px;font-weight:700}
+.photo{position:absolute;left:90px;right:90px;top:300px;height:1200px;border-radius:60px;background-size:cover;background-position:center;box-shadow:0 60px 100px -40px rgba(74,44,33,.6)}
+.sticker{position:absolute;right:60px;top:1300px;width:340px;height:340px;border-radius:50%;background:#FF8FAB;display:grid;place-items:center;font:400 96px 'Bagel Fat One';color:#4A2C21;box-shadow:0 20px 40px -10px rgba(74,44,33,.5)}
+.pcap{position:absolute;left:90px;top:1580px;font:400 110px/1 'Bagel Fat One'}
+.end{background:#FFF4DC}
+.endTag{position:absolute;left:0;right:0;top:1380px;text-align:center;font:700 58px 'Bricolage Grotesque'}
+.dots{position:absolute;left:0;right:0;top:1520px;display:flex;justify-content:center;gap:28px}
+.dots i{width:80px;height:80px;border-radius:50%}
+.demo{position:absolute;left:0;right:0;bottom:120px;text-align:center;font:500 28px 'Bricolage Grotesque';color:#7D5E52}
+#endlogo{position:absolute;left:50%;top:420px;width:430px;margin-left:-215px}
+.endWord{position:absolute;left:0;right:0;top:960px;text-align:center;font:400 250px/1 'Bagel Fat One'}
+</style></head><body>
+
+<div class="L" id="A">
+  <svg id="logo" viewBox="0 0 100 120">
+    <defs><clipPath id="cc"><path d="M22 62L78 62L50 116Z"/></clipPath></defs>
+    <g id="grid">
+      <line class="g gl" x1="10" y1="0" x2="10" y2="120"/><line class="g gl" x1="30" y1="0" x2="30" y2="120"/><line class="g gl" x1="50" y1="0" x2="50" y2="120"/><line class="g gl" x1="70" y1="0" x2="70" y2="120"/><line class="g gl" x1="90" y1="0" x2="90" y2="120"/>
+      <line class="g gl" x1="0" y1="12" x2="100" y2="12"/><line class="g gl" x1="0" y1="37" x2="100" y2="37"/><line class="g gl" x1="0" y1="62" x2="100" y2="62"/><line class="g gl" x1="0" y1="87" x2="100" y2="87"/><line class="g gl" x1="0" y1="112" x2="100" y2="112"/>
+      <circle class="g gl" cx="50" cy="46" r="36" style="stroke-width:.8"/><path class="g gl" d="M22 62L78 62L50 116Z" style="stroke-width:.8"/>
+    </g>
+    <g id="cone"><path d="M22 62L78 62L50 116Z" fill="#E8A04C"/>
+      <g clip-path="url(#cc)" stroke="#4A2C21" stroke-width="2.4" opacity=".55">
+        <line x1="-10" y1="60" x2="30" y2="120"/><line x1="5" y1="60" x2="45" y2="120"/><line x1="20" y1="60" x2="60" y2="120"/><line x1="35" y1="60" x2="75" y2="120"/><line x1="50" y1="60" x2="90" y2="120"/><line x1="65" y1="60" x2="105" y2="120"/>
+        <line x1="110" y1="60" x2="70" y2="120"/><line x1="95" y1="60" x2="55" y2="120"/><line x1="80" y1="60" x2="40" y2="120"/><line x1="65" y1="60" x2="25" y2="120"/><line x1="50" y1="60" x2="10" y2="120"/><line x1="35" y1="60" x2="-5" y2="120"/>
+      </g></g>
+    <g id="scoopG"><path id="scoop" d="M14 58C14 30 30 12 50 12C70 12 86 30 86 58C82 66 76 60 72 66C68 74 62 64 58 70C54 79 46 79 43 70C39 62 34 72 29 66C25 60 18 66 14 58Z" fill="#FF8FAB"/>
+      <ellipse cx="36" cy="30" rx="7" ry="4.5" fill="#fff" opacity=".55" transform="rotate(-30 36 30)"/></g>
+  </svg>
+  <div class="word" id="word"><span>m</span><span>o</span><span>n</span><span>a</span></div>
+  <p class="flav" id="flav"><b id="flavB">Fraise</b></p>
+</div>
+
+<div class="L" id="B">
+  <div class="photo" id="p1" style="background-image:url(../../public/demos/mona/cornet.jpg)"></div>
+  <div class="photo" id="p2" style="background-image:url(../../public/demos/mona/cornets.jpg)"></div>
+  <div class="photo" id="p3" style="background-image:url(../../public/demos/mona/coupe.jpg)"></div>
+  <div class="sticker" id="stk">mona</div>
+  <p class="pcap" id="pcap"></p>
+</div>
+
+<div class="L end" id="C">
+  <svg id="endlogo" viewBox="0 0 100 120"><defs><clipPath id="cc2"><path d="M22 62L78 62L50 116Z"/></clipPath></defs><g ><path d="M22 62L78 62L50 116Z" fill="#E8A04C"/>
+      <g clip-path="url(#cc2)" stroke="#4A2C21" stroke-width="2.4" opacity=".55">
+        <line x1="-10" y1="60" x2="30" y2="120"/><line x1="5" y1="60" x2="45" y2="120"/><line x1="20" y1="60" x2="60" y2="120"/><line x1="35" y1="60" x2="75" y2="120"/><line x1="50" y1="60" x2="90" y2="120"/><line x1="65" y1="60" x2="105" y2="120"/>
+        <line x1="110" y1="60" x2="70" y2="120"/><line x1="95" y1="60" x2="55" y2="120"/><line x1="80" y1="60" x2="40" y2="120"/><line x1="65" y1="60" x2="25" y2="120"/><line x1="50" y1="60" x2="10" y2="120"/><line x1="35" y1="60" x2="-5" y2="120"/>
+      </g></g>
+    <g ><path d="M14 58C14 30 30 12 50 12C70 12 86 30 86 58C82 66 76 60 72 66C68 74 62 64 58 70C54 79 46 79 43 70C39 62 34 72 29 66C25 60 18 66 14 58Z" fill="#FF8FAB"/>
+      <ellipse cx="36" cy="30" rx="7" ry="4.5" fill="#fff" opacity=".55" transform="rotate(-30 36 30)"/></g>
+  </svg>
+  <div class="endWord" id="endWord">mona</div>
+  <p class="endTag" id="endTag">Glaces faites chaque matin</p>
+  <div class="dots" id="dots"><i style="background:#FF8FAB"></i><i style="background:#A8D5A2"></i><i style="background:#E8A04C"></i><i style="background:#5B5BD6"></i><i style="background:#4A2C21"></i></div>
+  <p class="demo">Démo · marque imaginaire · identité réalisée par Au Pixel Près</p>
+</div>
+
+<script>
+window.DUR = 10;
+const $ = (id) => document.getElementById(id);
+const cl = (x) => Math.max(0, Math.min(1, x));
+const eo = (x) => 1 - Math.pow(1 - cl(x), 4);
+const back = (x) => { x = cl(x); const c = 2.4; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const elastic = (x) => { x = cl(x); return x === 0 || x === 1 ? x : Math.pow(2, -9 * x) * Math.sin((x * 10 - .75) * (2 * Math.PI / 3)) + 1; };
+const SC = { A: [0, 6.0], B: [6.0, 8.2], C: [8.2, 10.01] };
+function vis(id, t) { const [a, b] = SC[id]; const on = t >= a && t < b; $(id).style.opacity = on ? 1 : 0; return on ? t - a : null; }
+const FLAV = [["Fraise", "#FF8FAB", "#FFD3DE"], ["Pistache", "#A8D5A2", "#DDF0D9"], ["Myrtille", "#5B5BD6", "#D9D9F7"], ["Vanille", "#FFF4DC", "#FBE7C3"], ["Fraise", "#FF8FAB", "#FFD3DE"]];
+const gl = [...document.querySelectorAll(".gl")]; gl.forEach(l => { l.style.strokeDasharray = 300; });
+
+window.render = function (t) {
+  let u;
+  if ((u = vis("A", t)) !== null) {
+    // 1. La grille se dessine
+    gl.forEach((l, i) => { l.style.strokeDashoffset = 300 * (1 - eo((u - i * .05) / .9)); });
+    $("grid").style.opacity = 1 - eo((u - 2.6) / .5);
+    // 2. Le cornet monte, 3. la boule tombe et s'écrase
+    const kc = (u - 1.0) / .6; $("cone").style.transform = `translateY(${(1 - back(kc)) * 60}px)`; $("cone").style.opacity = kc > 0 ? 1 : 0;
+    const ks = (u - 1.5) / .9; const drop = ks < 0 ? -80 : (1 - Math.min(1, eo(ks * 1.6))) * -80;
+    const sq = ks > .35 ? elastic((ks - .35) / .9) : 0;
+    $("scoopG").style.transformOrigin = "50px 66px"; $("scoopG").style.transformBox = "view-box";
+    $("scoopG").style.transform = `translateY(${drop}px) scale(${ks > .35 ? 1 + (1 - sq) * .25 : 1}, ${ks > .35 ? 1 - (1 - sq) * .25 : 1})`;
+    $("scoopG").style.opacity = ks > 0 ? 1 : 0;
+    // 4. Le mot « mona » rebondit lettre par lettre
+    [...$("word").children].forEach((s, i) => { const k = (u - 2.6 - i * .1) / .6; s.style.transform = `translateY(${(1 - back(k)) * 200}px) rotate(${(1 - eo(k)) * -15}deg)`; s.style.opacity = k > 0 ? 1 : 0; });
+    // 5. La boule change de parfum (et le fond suit)
+    const fi = u < 3.8 ? 0 : Math.min(FLAV.length - 1, Math.floor((u - 3.8) / .5) + 1);
+    const [name, col, bg] = FLAV[fi];
+    $("scoop").setAttribute("fill", col); document.body.style.background = bg;
+    const kf = u < 3.8 ? 0 : ((u - 3.8) % .5) / .5;
+    $("flavB").textContent = name; $("flav").style.opacity = eo((u - 3.4) / .3); $("flavB").style.transform = `scale(${u < 3.8 ? 1 : 1 + (1 - eo(kf * 2)) * .25})`;
+    $("logo").style.transform = `rotate(${u > 3.8 ? Math.sin(u * 6) * 3 : 0}deg)`;
+  } else document.body.style.background = t < 8.2 ? "#FFD3DE" : "#FFF4DC";
+  if ((u = vis("B", t)) !== null) {
+    const caps = ["Fraise des bois", "Cornets du jour", "Coupes à partager"];
+    ["p1", "p2", "p3"].forEach((p, i) => { const k = (u - i * .72) / .35; $(p).style.opacity = k > 0 ? 1 : 0; $(p).style.transform = `translateY(${(1 - eo(k)) * 300}px) rotate(${(i - 1) * 3 * (1 - eo(k * .6))}deg) scale(${1.04 - (u - i * .72) * .02})`; $(p).style.zIndex = i; });
+    const ci = Math.min(2, Math.floor(u / .72)); $("pcap").textContent = caps[ci];
+    $("stk").style.transform = `rotate(${-12 + Math.sin(u * 3) * 4}deg) scale(${back(u / .5)})`; $("stk").style.zIndex = 5; $("pcap").style.zIndex = 5;
+  }
+  if ((u = vis("C", t)) !== null) {
+    $("endlogo").style.transform = `translateY(${(1 - back(u / .6)) * -400}px)`;
+    $("endWord").style.transform = `scale(${back((u - .25) / .5)})`;
+    $("endTag").style.opacity = eo((u - .6) / .3);
+    [...$("dots").children].forEach((d, i) => { d.style.transform = `scale(${back((u - .8 - i * .08) / .4)})`; });
+  }
+};
+render(0);
+</script></body></html>

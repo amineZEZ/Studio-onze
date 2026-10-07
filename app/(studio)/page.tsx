@@ -6,7 +6,9 @@ import { MotionPlayground } from "@/components/fx/MotionPlayground";
 import { PixelHero } from "@/components/fx/PixelHero";
 import { ServiceList } from "@/components/fx/ServiceList";
 import { archivo } from "@/lib/fonts";
-import { faq, offers, site, steps } from "@/lib/site";
+import Image from "next/image";
+import Link from "next/link";
+import { demos, faq, offers, site, steps } from "@/lib/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -86,11 +88,37 @@ export default function Home() {
           </div>
         </section>
 
+
+        {/* DÉMOS : de vrais projets qui fonctionnent, pour des marques imaginaires */}
+        <section id="demos" className="sec" aria-labelledby="demos-t">
+          <div className="sec-head split">
+            <div>
+              <p className="label pixel">03 · Démos</p>
+              <h2 id="demos-t" className="h2" data-split>Clique, teste, c&apos;est réel.</h2>
+            </div>
+            <p className="lead" data-reveal>Quatre projets complets pour des marques imaginaires : un site, une application, un logiciel et une identité visuelle. Ils fonctionnent vraiment, essaie-les comme le ferait ton client.</p>
+          </div>
+          <div className="demos">
+            {demos.map((d, i) => (
+              <Link key={d.slug} href={`/demos/${d.slug}`} className="demo-card" data-reveal={i * 0.08} data-cursor="Tester" style={{ ["--c" as string]: d.color }}>
+                <div className="demo-media">
+                  {"video" in d && d.video ? <InViewVideo src={d.video} poster={d.poster!} label={`Vidéo de la démo ${d.name}`} /> : <Image src={d.image!} alt={`Aperçu du logiciel ${d.name}`} fill sizes="(max-width:900px) 92vw, 25vw" />}
+                  <span className="demo-kind pixel">{d.kind}</span>
+                </div>
+                <h3>{d.name}</h3>
+                <p>{d.text}</p>
+                <span className="demo-go">Ouvrir la démo <i aria-hidden="true">→</i></span>
+              </Link>
+            ))}
+          </div>
+          <p className="after pixel">Marques imaginaires · photos Unsplash · tout le reste est fait par le studio</p>
+        </section>
+
         {/* MOTION DESIGN EN DIRECT */}
         <section id="motion" className="sec" aria-labelledby="motion-t">
           <div className="sec-head split">
             <div>
-              <p className="label pixel">03 · En direct</p>
+              <p className="label pixel">04 · En direct</p>
               <h2 id="motion-t" className="h2" data-split>Le motion design, c&apos;est ça. Essaie.</h2>
             </div>
             <p className="lead" data-reveal>Une animation qui accroche, c&apos;est une question de rythme. Glisse la tête de lecture, change la courbe, regarde le pixel réagir. On règle chaque image de tes vidéos avec ce soin.</p>
@@ -102,7 +130,7 @@ export default function Home() {
         <section id="offres" className="sec" aria-labelledby="offres-t">
           <div className="sec-head split">
             <div>
-              <p className="label pixel">04 · Prix</p>
+              <p className="label pixel">05 · Prix</p>
               <h2 id="offres-t" className="h2" data-split>Des prix clairs, dès le départ</h2>
             </div>
             <p className="lead" data-reveal>Prix de départ, ajustés selon ton projet. Le devis est gratuit et sans engagement.</p>
@@ -124,7 +152,7 @@ export default function Home() {
         <section id="methode" className="sec hsec" data-hscroll aria-labelledby="methode-t">
           <div className="htrack">
             <div className="hpanel intro">
-              <p className="label pixel">05 · Méthode</p>
+              <p className="label pixel">06 · Méthode</p>
               <h2 id="methode-t" className="h2">Comment ça se passe</h2>
               <p className="pixel hint">Défile →</p>
             </div>
@@ -141,7 +169,7 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" className="sec" aria-labelledby="faq-t">
           <div className="sec-head">
-            <p className="label pixel">06 · Questions</p>
+            <p className="label pixel">07 · Questions</p>
             <h2 id="faq-t" className="h2" data-split>Tu te demandes peut-être…</h2>
           </div>
           <div className="faq">
@@ -153,7 +181,7 @@ export default function Home() {
         <section id="devis" className="sec dark devis" aria-labelledby="devis-t">
           <div className="devis-grid">
             <div>
-              <p className="label pixel">07 · Devis</p>
+              <p className="label pixel">08 · Devis</p>
               <h2 id="devis-t" className="mega" data-split>Parlons-en.</h2>
               <p className="lead" data-reveal>Réponse sous 48 h avec un devis gratuit. Pas besoin d&apos;avoir tout prévu : quelques lignes suffisent.</p>
               <p className="pixel small-note">Pas d&apos;engagement · Acompte seulement si tu valides</p>
