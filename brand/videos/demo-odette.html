@@ -1,66 +1,63 @@
 <!doctype html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="fonts/all.css">
 <style>
-/* Vidéo démo « Fournil Odette » (marque imaginaire) — 1080 × 1920, 13 s. */
+/* Vidéo démo « Odette » (marque imaginaire) — 1080 × 1920, 13 s. Même direction que le site : papier, encre, bleu. */
 *{box-sizing:border-box;margin:0}
-html,body{width:1080px;height:1920px;overflow:hidden;background:#1C1511}
-body{font-family:'Manrope',sans-serif;color:#F4EDE1}
-.L{position:absolute;inset:0;overflow:hidden;opacity:0}
-.ph{position:absolute;inset:-6%;background-size:cover;background-position:center}
-.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,21,17,.15),rgba(28,21,17,.25) 45%,rgba(28,21,17,.92) 85%)}
-.big{position:absolute;left:80px;right:110px;font-family:'Gloock',serif;line-height:.95;letter-spacing:-.02em}
-.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#FAF8F3}
+body{font-family:'Instrument Sans',sans-serif;color:#1B1A17}
+.L{position:absolute;inset:0;overflow:hidden;opacity:0;background:#FAF8F3}
+.ph{position:absolute;left:0;right:0;top:0;height:1240px;background-size:cover;background-position:center;overflow:hidden}
+.ph i{position:absolute;inset:-4%;background:inherit;background-size:cover;background-position:center}
+.big{position:absolute;left:80px;right:110px;font-family:'Young Serif',serif;line-height:.95;letter-spacing:-.02em}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
 .w>span{display:inline-block}
-.time{font-size:250px;color:#E9B44C;top:980px}
-.sub{position:absolute;left:84px;right:120px;top:1260px;font-size:72px;font-family:'Gloock',serif;line-height:1.05}
-.k{position:absolute;left:86px;top:930px;font:800 30px 'Manrope';letter-spacing:.22em;text-transform:uppercase;color:#E9B44C}
-.steam{position:absolute;width:60px;height:180px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.35),transparent);filter:blur(10px)}
-.phone{position:absolute;left:50%;top:330px;width:560px;height:1150px;margin-left:-280px;border-radius:70px;background:#0d0a08;padding:18px;box-shadow:0 0 0 3px #3a2f27,0 60px 120px -30px rgba(0,0,0,.8)}
-.screen{position:relative;width:100%;height:100%;border-radius:54px;overflow:hidden;background:#F4EDE1}
+.time{font-size:230px;color:#2340C9;top:1300px}
+.sub{position:absolute;left:84px;right:120px;top:1560px;font-size:76px;font-family:'Young Serif',serif;line-height:1.05}
+.k{position:absolute;left:84px;top:1270px;font:600 30px 'Instrument Sans';color:#6F6A60;opacity:0}
+.cap1{position:absolute;left:84px;bottom:150px;font:600 28px 'Instrument Sans';color:#6F6A60}
+.phone{position:absolute;left:50%;top:230px;width:580px;height:1190px;margin-left:-290px;border-radius:72px;background:#1B1A17;padding:16px;box-shadow:0 50px 100px -40px rgba(27,26,23,.55)}
+.screen{position:relative;width:100%;height:100%;border-radius:58px;overflow:hidden;background:#FAF8F3}
 .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0}
-.tap{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(233,180,76,.35);border:5px solid #fff;opacity:0}
-.cap{position:absolute;left:80px;right:110px;top:1560px;text-align:center;font-family:'Gloock',serif;font-size:84px;line-height:1}
-.cap b{color:#E9B44C;font-weight:400}
-.wipe{position:absolute;left:0;right:0;height:100%;background:#E9B44C;transform:translateY(100%)}
-.end{background:#1C1511;display:grid;place-items:center}
-.logo{font-family:'Gloock',serif;font-size:250px;letter-spacing:-.02em;text-align:center;line-height:1}
-.logo small{display:block;font:800 40px 'Manrope';letter-spacing:.4em;color:#E9B44C;margin-top:18px;text-transform:uppercase}
-.tag{position:absolute;left:0;right:0;top:1180px;text-align:center;font-size:52px;font-family:'Gloock',serif}
-.cta{position:absolute;left:50%;top:1340px;transform:translateX(-50%);background:#E9B44C;color:#21180F;font:800 42px 'Manrope';padding:30px 56px;border-radius:99px;white-space:nowrap}
-.demo{position:absolute;left:0;right:0;bottom:120px;text-align:center;font:600 28px 'Manrope';color:#A89A86}
-.wheat{position:absolute;top:620px;left:50%;width:6px;height:0;background:#E9B44C;transform:translateX(-50%)}
+.tap{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(35,64,201,.25);border:5px solid #2340C9;opacity:0}
+.cap{position:absolute;left:80px;right:80px;top:1520px;text-align:center;font-family:'Young Serif',serif;font-size:88px;line-height:1}
+.cap b{color:#2340C9;font-weight:400}
+.wipe{position:absolute;left:0;right:0;height:100%;background:#2340C9;transform:translateY(100%)}
+.logo{position:absolute;left:0;right:0;top:640px;font-family:'Young Serif',serif;font-size:260px;letter-spacing:-.02em;text-align:center;line-height:1}
+.logo small{display:block;font:600 40px 'Instrument Sans';letter-spacing:.3em;color:#6F6A60;margin-top:26px;text-transform:uppercase}
+.tag{position:absolute;left:0;right:0;top:1120px;text-align:center;font-size:56px;font-family:'Young Serif',serif;padding:0 80px;line-height:1.15}
+.cta{position:absolute;left:50%;top:1360px;transform:translateX(-50%);background:#2340C9;color:#fff;font:600 44px 'Instrument Sans';padding:32px 54px;border-radius:8px;white-space:nowrap}
+.demo{position:absolute;left:0;right:0;bottom:110px;text-align:center;font:500 28px 'Instrument Sans';color:#6F6A60}
+.rule{position:absolute;left:80px;right:80px;top:1250px;height:3px;background:#1B1A17;transform-origin:left}
 </style></head><body>
-
-<div class="L" id="A"><div class="ph" id="Aph" style="background-image:url(../../public/demos/odette/pains.jpg)"></div><div class="shade"></div>
-  <p class="k" id="Ak">Fournil Odette · Lyon</p>
-  <h1 class="big time" id="At"><span class="w"><span>5 h 30</span></span></h1>
-  <p class="sub" id="As"><span class="w"><span>Le four chauffe.</span></span></p>
+<div class="L" id="A"><div class="ph" style="background-image:url(../../public/d/odette/petrir.jpg)"><i id="Aph"></i></div>
+  <div class="rule" id="Ar"></div>
+  <h1 class="big time" id="At"><span class="w"><span>5 h 00</span></span></h1>
+  <p class="sub" id="As"><span class="w"><span>La pâte de campagne.</span></span></p>
 </div>
 
-<div class="L" id="B"><div class="ph" id="Bph" style="background-image:url(../../public/demos/odette/croissants.jpg)"></div><div class="shade"></div>
-  <div id="steams"></div>
+<div class="L" id="B"><div class="ph" style="background-image:url(../../public/d/odette/croissants-four.jpg)"><i id="Bph"></i></div>
+  <div class="rule" id="Br"></div>
   <h1 class="big time" id="Bt"><span class="w"><span>6 h 30</span></span></h1>
   <p class="sub" id="Bs"><span class="w"><span>Les croissants sortent.</span></span></p>
 </div>
 
-<div class="L" id="C" style="background:#271E18">
+<div class="L" id="C" style="background:#F1EDE4">
   <div class="phone" id="phone"><div class="screen">
-    <img id="s0" src="assets/od-m0.png"><img id="s1" src="assets/od-m1.png"><img id="s2" src="assets/od-m2.png"><img id="s3" src="assets/od-m3.png">
+    <img id="s0" src="assets/od2-m0.png"><img id="s1" src="assets/od2-m1.png"><img id="s2" src="assets/od2-m2.png"><img id="s3" src="assets/od2-m3.png">
     <div class="tap" id="tap"></div>
   </div></div>
   <p class="cap" id="Ccap">Tu commandes <b>en ligne</b>.</p>
 </div>
 
-<div class="L" id="D"><div class="ph" id="Dph" style="background-image:url(../../public/demos/odette/boutique.jpg)"></div><div class="shade"></div>
-  <h1 class="big" id="Dt" style="top:1080px;font-size:150px">Tu passes.<br><span style="color:#E9B44C">C'est prêt.</span></h1>
+<div class="L" id="D"><div class="ph" style="background-image:url(../../public/d/odette/comptoir.jpg);height:1920px"><i id="Dph"></i></div>
+  <h1 class="big" id="Dt" style="top:1250px;font-size:150px;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5)">Tu passes.<br>C'est prêt.</h1>
 </div>
 
-<div class="L end" id="E">
-  <div class="wheat" id="wheat"></div>
-  <div class="logo" id="logo">Odette<small>fournil</small></div>
-  <p class="tag" id="tag">Le pain se lève tôt. Nous aussi.</p>
+<div class="L" id="E">
+  <div class="logo" id="logo">Odette<small>boulangerie · Lyon</small></div>
+  <p class="tag" id="tag">Du pain au levain, cuit toute la journée.</p>
   <div class="cta" id="cta">Commander à emporter</div>
-  <p class="demo">Démo · marque imaginaire · site réalisé par Au Pixel Près</p>
+  <p class="demo">Démo · marque imaginaire · site conçu par Au Pixel Près</p>
 </div>
 
 <div class="wipe" id="wipe"></div>
@@ -75,27 +72,25 @@ const back = (x) => { x = cl(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x 
 const SC = { A: [0, 2.7], B: [2.7, 5.2], C: [5.2, 9.0], D: [9.0, 10.8], E: [10.8, 13.01] };
 function vis(id, t) { const [a, b] = SC[id]; const on = t >= a && t < b; $(id).style.opacity = on ? 1 : 0; return on ? t - a : null; }
 function rise(el, u, d = .9) { const p = eo(u / d); el.querySelectorAll(".w>span").forEach(s => s.style.transform = `translateY(${(1 - p) * 110}%)`); el.style.opacity = u < 0 ? 0 : 1; }
-// Vapeur au-dessus des croissants
-for (let i = 0; i < 7; i++) { const s = document.createElement("div"); s.className = "steam"; s.style.left = (140 + i * 120) + "px"; $("steams").appendChild(s); }
 
 window.render = function (t) {
   let u;
   if ((u = vis("A", t)) !== null) {
     $("Aph").style.transform = `scale(${1.12 - u * 0.03})`;
-    $("Ak").style.opacity = eo((u - .1) / .5);
-    // L'heure défile de 5 h 00 à 5 h 30
-    const m = Math.round(eo(u / 1.4) * 30); $("At").querySelector(".w>span").textContent = `5 h ${String(m).padStart(2, "0")}`;
+    $("Ar").style.transform = `scaleX(${eo(u / .8)})`;
+    // L'heure défile de 5 h 00 à 5 h 40
+    const m = Math.round(eo(u / 1.4) * 40); $("At").querySelector(".w>span").textContent = `5 h ${String(m).padStart(2, "0")}`;
     rise($("At"), u - .15); rise($("As"), u - .9);
   }
   if ((u = vis("B", t)) !== null) {
     $("Bph").style.transform = `scale(${1.04 + u * 0.035}) translateX(${-u * 12}px)`;
+    $("Br").style.transform = `scaleX(${eo(u / .8)})`;
     rise($("Bt"), u - .1); rise($("Bs"), u - .55);
-    document.querySelectorAll(".steam").forEach((s, i) => { const k = ((u * 0.5 + i * 0.17) % 1); s.style.top = (900 - k * 520) + "px"; s.style.opacity = Math.sin(k * Math.PI) * 0.9; s.style.transform = `translateX(${Math.sin(u * 2 + i) * 20}px) scale(${1 + k})`; });
   }
   if ((u = vis("C", t)) !== null) {
     const ph = $("phone"); ph.style.transform = `translateY(${(1 - back(u / .7)) * 900}px) rotate(${(1 - eo(u / .9)) * -6}deg)`;
     // Écrans : accueil → panier → créneau → confirmation, avec un « tap » avant chaque changement
-    const cuts = [0, 1.0, 1.95, 2.9], taps = [[165, 975], [262, 1033], [262, 822]];
+    const cuts = [0, 1.0, 1.95, 2.9], taps = [[208, 736], [407, 1128], [274, 830]];
     cuts.forEach((c, i) => { const next = cuts[i + 1] ?? 99; $("s" + i).style.opacity = u >= c && u < next + .25 ? cl((u - c) / .25) : 0; });
     const tp = $("tap"); tp.style.opacity = 0;
     taps.forEach(([x, y], i) => { const k = (u - (cuts[i + 1] - .32)) / .32; if (k >= 0 && k <= 1) { tp.style.left = x + "px"; tp.style.top = y + "px"; tp.style.opacity = 1 - k; tp.style.transform = `scale(${.6 + k * .6})`; } });
@@ -107,8 +102,7 @@ window.render = function (t) {
     const d = $("Dt"); d.style.opacity = eo(u / .4); d.style.transform = `translateY(${(1 - eo(u / .7)) * 80}px)`;
   }
   if ((u = vis("E", t)) !== null) {
-    $("wheat").style.height = (eo(u / .6) * 120) + "px"; $("wheat").style.opacity = 1 - eo((u - .5) / .3);
-    $("logo").style.transform = `scale(${.8 + .2 * back(u / .7)})`; $("logo").style.opacity = eo(u / .3);
+    $("logo").style.transform = `translateY(${(1 - eo(u / .8)) * 60}px)`; $("logo").style.opacity = eo(u / .3);
     $("tag").style.opacity = eo((u - .45) / .4);
     $("cta").style.transform = `translateX(-50%) scale(${back((u - .75) / .5)})`;
   }

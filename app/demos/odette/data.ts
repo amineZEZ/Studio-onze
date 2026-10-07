@@ -3,15 +3,16 @@
 export type Product = { id: string; name: string; desc: string; price: number; cat: "Pains" | "Viennoiseries" | "Douceurs"; img: string; tag?: string };
 
 export const products: Product[] = [
-  { id: "trad", name: "Tradition", desc: "Farine T65, 24 h de pousse, croûte qui chante.", price: 1.3, cat: "Pains", img: "/demos/odette/tranche.jpg", tag: "La plus vendue" },
-  { id: "miche", name: "Grande miche au levain", desc: "Seigle et blé, levain naturel. Se garde 5 jours.", price: 6.9, cat: "Pains", img: "/demos/odette/miche.jpg" },
-  { id: "cereales", name: "Pain aux graines", desc: "Lin, tournesol, courge et sésame torréfiés.", price: 3.4, cat: "Pains", img: "/demos/odette/pains.jpg" },
-  { id: "croissant", name: "Croissant au beurre", desc: "Beurre AOP Charentes-Poitou, feuilletage sur 3 jours.", price: 1.4, cat: "Viennoiseries", img: "/demos/odette/croissants.jpg", tag: "Sort à 7 h" },
-  { id: "pac", name: "Pain au chocolat", desc: "Deux barres de chocolat noir 64 %.", price: 1.6, cat: "Viennoiseries", img: "/demos/odette/vitrine.jpg" },
-  { id: "brioche", name: "Brioche tressée", desc: "Pur beurre, sucre perlé, à partager.", price: 7.5, cat: "Viennoiseries", img: "/demos/odette/boutique.jpg" },
-  { id: "flan", name: "Flan pâtissier", desc: "Vanille de Madagascar, pâte brisée maison.", price: 3.9, cat: "Douceurs", img: "/demos/odette/vitrine.jpg" },
-  { id: "tarte", name: "Tarte fine aux pommes", desc: "Pâte feuilletée, pommes du Pilat, caramel au beurre salé.", price: 4.2, cat: "Douceurs", img: "/demos/odette/croissants.jpg" },
-  { id: "cookie", name: "Cookie au sarrasin", desc: "Chocolat au lait et fleur de sel.", price: 2.8, cat: "Douceurs", img: "/demos/odette/boutique.jpg" },
+  { id: "trad", name: "Baguette de tradition", desc: "Farine Label Rouge, pétrie lentement, croûte fine qui craque.", price: 1.3, cat: "Pains", img: "/d/odette/assortiment.jpg", tag: "Toute la journée" },
+  { id: "campagne", name: "Pain de campagne", desc: "Blé et un peu de seigle, levain naturel, mie souple.", price: 4.2, cat: "Pains", img: "/d/odette/campagne.jpg" },
+  { id: "miche", name: "Grande miche au levain", desc: "1,2 kg, 36 h de fermentation. Se garde une semaine.", price: 9.8, cat: "Pains", img: "/d/odette/miche.jpg" },
+  { id: "seigle", name: "Pain de seigle", desc: "Seigle à 80 %, dense et légèrement acidulé.", price: 4.6, cat: "Pains", img: "/d/odette/seigle.jpg" },
+  { id: "croissant", name: "Croissant", desc: "Beurre AOP Charentes-Poitou, feuilletage sur trois jours.", price: 1.4, cat: "Viennoiseries", img: "/d/odette/croissant.jpg", tag: "6 h 30" },
+  { id: "pac", name: "Pain au chocolat", desc: "Deux barres de chocolat noir 64 %.", price: 1.6, cat: "Viennoiseries", img: "/d/odette/pains-choco.jpg" },
+  { id: "brioche", name: "Brioche Nanterre", desc: "Pur beurre, œufs plein air, à partager le dimanche.", price: 8.5, cat: "Viennoiseries", img: "/d/odette/brioche.jpg" },
+  { id: "graines", name: "Pain aux graines", desc: "Lin, tournesol, courge et sésame torréfiés.", price: 3.9, cat: "Pains", img: "/d/odette/graines.jpg" },
+  { id: "cookie", name: "Cookie chocolat noir", desc: "Gros morceaux de chocolat, fleur de sel.", price: 2.8, cat: "Douceurs", img: "/d/odette/cookies.jpg" },
+  { id: "cake", name: "Cake banane et noix de pécan", desc: "Bananes bien mûres, cassonade, en tranche ou entier.", price: 3.5, cat: "Douceurs", img: "/d/odette/cake-banane.jpg" },
 ];
 
 /** Fournées de la journée (heures de sortie du four). */

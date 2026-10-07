@@ -8,13 +8,14 @@ export default function Mona() {
     <div className={s.root}>
       <section className={s.hero}>
         <div className={s.heroTxt}>
-          <p className={s.kicker} data-r>Identité visuelle · Glacier artisanal</p>
-          <h1 className={s.h1} data-r style={{ ["--d" as string]: ".1s" }}>Une marque<br />qui donne<br /><span>envie de lécher l&apos;écran.</span></h1>
-          <p className={s.lead} data-r style={{ ["--d" as string]: ".2s" }}>Mona ouvre son premier glacier. Il lui fallait un nom qui sonne, un logo reconnaissable de loin et un univers joyeux, sur le pot comme sur Instagram.</p>
+          <p className={s.client} data-r>Glaces Mona · Marseille</p>
+          <h1 className={s.h1} data-r style={{ ["--d" as string]: ".1s" }}>Identité visuelle d&apos;un glacier de quartier.</h1>
+          <p className={s.lead} data-r style={{ ["--d" as string]: ".2s" }}>Mona change de parfums chaque semaine. Il lui fallait un logo qui se reconnaît de loin, des couleurs gourmandes et des modèles prêts à l&apos;emploi pour la boutique et Instagram.</p>
+          <ul className={s.deliv} data-r style={{ ["--d" as string]: ".3s" }}><li>Logo et déclinaisons</li><li>Couleurs et typographies</li><li>Modèles Instagram</li><li>Étiquettes et carte de fidélité</li><li>Logo animé</li></ul>
         </div>
-        <div className={s.heroLogo} data-r style={{ ["--d" as string]: ".15s" }}>
-          <div className={s.bigMark}><Symbol size={260} id="hero" /></div>
-          <Lockup size={64} id="hero-l" />
+        <div className={s.heroVisual} data-r style={{ ["--d" as string]: ".15s" }}>
+          <div className={s.heroPhoto}><Image src="/d/mona/cornet-jaune.jpg" alt="Cornet de glace à la fraise tenu devant un mur jaune" fill priority sizes="(max-width:980px) 100vw, 45vw" /></div>
+          <div className={s.heroSticker}><Symbol size={120} id="hero" /></div>
         </div>
       </section>
 
@@ -53,36 +54,44 @@ export default function Mona() {
       </section>
 
       <section className={s.sec}>
-        <div className={s.secHead}><p className={s.kicker} data-r>05 · Applications</p><h2 className={s.h2} data-r>La marque dans la vraie vie.</h2></div>
-        <div className={s.apps}>
-          <figure className={s.cup} data-r>
-            <div className={s.cupBody}><Lockup size={36} id="cup" /><small>Fraise · basilic</small></div>
-            <div className={s.cupLid} />
-            <figcaption>Pot 500 ml</figcaption>
+        <div className={s.secHead}><p className={s.kicker} data-r>05 · Instagram</p><h2 className={s.h2} data-r>Des modèles prêts à publier.</h2><p className={s.lead} data-r>Photos de la boutique et publications aux couleurs de Mona, pour annoncer les parfums de la semaine sans repartir de zéro.</p></div>
+        <div className={s.feed}>
+          <div className={s.post} data-r><Image src="/d/mona/vitrine.jpg" alt="Vitrine de glaces en bacs" fill sizes="(max-width:700px) 33vw, 260px" /></div>
+          <div className={`${s.post} ${s.tPink}`} data-r style={{ ["--d" as string]: ".05s" }}><small>Parfum de la semaine</small><b>Fraise<br />&amp; basilic</b><Symbol size={54} id="p1" /></div>
+          <div className={s.post} data-r style={{ ["--d" as string]: ".1s" }}><Image src="/d/mona/cornet-rue.jpg" alt="Cornet double boule tenu dans la rue" fill sizes="(max-width:700px) 33vw, 260px" /></div>
+          <div className={`${s.post} ${s.tChoc}`} data-r style={{ ["--d" as string]: ".15s" }}><small>Ouvert dès</small><b>samedi<br />14 h</b><span>Glaces Mona</span></div>
+          <div className={s.post} data-r style={{ ["--d" as string]: ".2s" }}><Image src="/d/mona/boules.jpg" alt="Trois boules de glace abricot" fill sizes="(max-width:700px) 33vw, 260px" /></div>
+          <div className={`${s.post} ${s.tGreen}`} data-r style={{ ["--d" as string]: ".25s" }}><small>Nouveau</small><b>Pistache<br />de Sicile</b><Symbol size={54} scoop="#A8D5A2" id="p2" /></div>
+          <div className={`${s.post} ${s.tCream}`} data-r style={{ ["--d" as string]: ".3s" }}><small>Cette semaine</small><ol><li>Fraise &amp; basilic</li><li>Pistache</li><li>Chocolat noir</li><li>Abricot</li><li>Vanille</li></ol></div>
+          <div className={s.post} data-r style={{ ["--d" as string]: ".35s" }}><Image src="/d/mona/chocolat.jpg" alt="Cornets au chocolat sur une assiette noire" fill sizes="(max-width:700px) 33vw, 260px" /></div>
+          <div className={s.post} data-r style={{ ["--d" as string]: ".4s" }}><Image src="/d/mona/paillettes.jpg" alt="Cornets colorés et vermicelles" fill sizes="(max-width:700px) 33vw, 260px" /></div>
+        </div>
+      </section>
+
+      <section className={`${s.sec} ${s.cream}`}>
+        <div className={s.secHead}><p className={s.kicker} data-r>06 · En boutique</p><h2 className={s.h2} data-r>Étiquettes et fidélité.</h2></div>
+        <div className={s.shopRow}>
+          <figure className={s.lids} data-r>
+            {[["Fraise", "#FF8FAB"], ["Pistache", "#A8D5A2"], ["Chocolat", "#4A2C21"]].map(([n, c], i) => (
+              <div key={n} className={s.lid} style={{ background: c, color: n === "Chocolat" ? "#FFF4DC" : "#4A2C21", ["--r" as string]: `${(i - 1) * 6}deg` }}>
+                <span className={s.lidName}>{n}</span><span className={s.lidMona}>mona</span><span className={s.lidSize}>500 ml</span>
+              </div>
+            ))}
+            <figcaption>Couvercles des pots, une couleur par parfum</figcaption>
           </figure>
-          <figure className={s.shop} data-r style={{ ["--d" as string]: ".1s" }}>
-            <div className={s.awning} />
-            <div className={s.facade}><Lockup size={44} color={MONA.vanille} scoop={MONA.fraise} id="shop" /><div className={s.window}><Image src="/demos/mona/cornets.jpg" alt="" fill sizes="300px" /></div></div>
-            <figcaption>Devanture</figcaption>
-          </figure>
-          <figure className={s.post} data-r style={{ ["--d" as string]: ".2s" }}>
-            <div className={s.postImg}><Image src="/demos/mona/cornet.jpg" alt="Cornet de glace rose tenu devant un mur jaune" fill sizes="300px" /><span className={s.postTag}>Nouveau parfum</span></div>
-            <div className={s.postBar}><Symbol size={26} id="post" /><b>glaces.mona</b><span>♥ Rose litchi, dispo ce week-end</span></div>
-            <figcaption>Publication Instagram</figcaption>
-          </figure>
-          <figure className={s.loyalFig} data-r style={{ ["--d" as string]: ".3s" }}><LoyaltyCard /><figcaption>Carte de fidélité (clique dessus)</figcaption></figure>
+          <figure className={s.loyalFig} data-r style={{ ["--d" as string]: ".1s" }}><LoyaltyCard /><figcaption>Carte de fidélité (clique pour tamponner)</figcaption></figure>
         </div>
       </section>
 
       <section className={`${s.sec} ${s.cream} ${s.motion}`}>
-        <div className={s.secHead}><p className={s.kicker} data-r>06 · En mouvement</p><h2 className={s.h2} data-r>Le logo s&apos;anime pour les réseaux.</h2><p className={s.lead} data-r>Une animation de 10 secondes, livrée au format TikTok et Reels, pour annoncer l&apos;ouverture et chaque nouveau parfum.</p></div>
+        <div className={s.secHead}><p className={s.kicker} data-r>07 · En mouvement</p><h2 className={s.h2} data-r>Le logo s&apos;anime pour les réseaux.</h2><p className={s.lead} data-r>Une animation de 10 secondes, livrée au format TikTok et Reels, pour annoncer l&apos;ouverture et chaque nouveau parfum.</p></div>
         <video className={s.motionVid} src="/video/demos/mona.mp4" poster="/video/demos/mona.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Animation du logo Mona" data-r />
       </section>
 
       <section className={s.photoBand} aria-hidden="true">
-        <div><Image src="/demos/mona/coupe.jpg" alt="" fill sizes="33vw" /></div>
+        <div><Image src="/d/mona/cornets.jpg" alt="" fill sizes="33vw" /></div>
         <div className={s.bandLogo}><Lockup size={70} color={MONA.chocolat} id="band" /></div>
-        <div><Image src="/demos/mona/cornets.jpg" alt="" fill sizes="33vw" /></div>
+        <div><Image src="/d/mona/batonnets.jpg" alt="" fill sizes="33vw" /></div>
       </section>
 
       <footer className={s.foot}>Glaces Mona est une marque imaginaire · Photos : Unsplash · Identité réalisée par Au Pixel Près</footer>

@@ -92,7 +92,7 @@ export function LoyaltyCard() {
       <div className={s.stamps}>
         {Array.from({ length: 10 }, (_, i) => (
           <button key={i} className={i < n ? `${s.stamp} ${s.stampOn}` : s.stamp} onClick={() => setN(i < n ? i : i + 1)} aria-label={`Case ${i + 1}${i < n ? " tamponnée" : ""}`}>
-            {i === 9 ? "🎁" : i < n ? "♥" : ""}
+            {i === 9 ? (i < n ? "♥" : "10e") : i < n ? "♥" : ""}
           </button>
         ))}
       </div>

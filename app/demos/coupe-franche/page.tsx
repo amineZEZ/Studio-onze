@@ -1,46 +1,62 @@
 import Image from "next/image";
 import s from "./coupe.module.css";
 import { BookingApp } from "./BookingApp";
-
-const features = [
-  ["Créneaux en temps réel", "Le client voit les places libres de chaque barbier, jour par jour."],
-  ["4 étapes, 30 secondes", "Prestation, barbier, heure, prénom. Pas de compte à créer."],
-  ["Rappel la veille", "Un SMS automatique : moins de rendez-vous oubliés."],
-  ["Installable", "S'ajoute à l'écran d'accueil du téléphone comme une vraie application."],
-];
+import { services } from "./data";
 
 export default function CoupeFranche() {
   return (
     <div className={s.root}>
-      <div className={s.layout}>
-        <section className={s.pitch}>
-          <div className={s.stripes} aria-hidden="true" />
-          <p className={s.kicker} data-r>Application de réservation</p>
-          <h1 className={s.h1} data-r style={{ ["--d" as string]: ".1s" }}>Ta coupe.<br />Réservée en<br /><span>30 secondes.</span></h1>
-          <p className={s.lead} data-r style={{ ["--d" as string]: ".2s" }}>
-            Coupe Franche voulait arrêter de répondre au téléphone pendant les coupes. On a créé une application de réservation simple, aux couleurs du salon.
-          </p>
-          <ul className={s.feats}>
-            {features.map(([t, d], i) => (
-              <li key={t} data-r style={{ ["--d" as string]: `${0.25 + i * 0.08}s` }}><b>{t}</b><span>{d}</span></li>
-            ))}
-          </ul>
-          <p className={s.note} data-r>Dans cette démo, rien n&apos;est envoyé : les SMS de rappel sont activés dans la version livrée au salon.</p>
-          <p className={s.tryIt} data-r>👉 Essaie l&apos;application : elle fonctionne vraiment.</p>
-          <div className={s.photos} aria-hidden="true">
-            <div className={s.ph1}><Image src="/demos/coupe-franche/coupe.jpg" alt="" fill sizes="240px" /></div>
-            <div className={s.ph2}><Image src="/demos/coupe-franche/outils.jpg" alt="" fill sizes="200px" /></div>
-            <div className={s.ph3}><Image src="/demos/coupe-franche/degrade.jpg" alt="" fill sizes="200px" /></div>
-          </div>
-        </section>
+      <section className={s.mosaic} aria-label="Le salon en images">
+        <figure className={s.m1}><Image src="/d/coupe-franche/classique.jpg" alt="Un barbier coiffe un client dans le salon" fill priority sizes="(max-width:900px) 100vw, 50vw" /></figure>
+        <figure className={s.m2}><Image src="/d/coupe-franche/tondeuse.jpg" alt="Finitions à la tondeuse sur un dégradé" fill sizes="(max-width:900px) 50vw, 25vw" /></figure>
+        <figure className={s.m3}><Image src="/d/coupe-franche/barbe-blaireau.jpg" alt="Mousse appliquée au blaireau avant un rasage" fill sizes="(max-width:900px) 50vw, 25vw" /></figure>
+      </section>
+      <h1 className={s.title}>Coupe <span>Franche</span></h1>
 
-        <section className={s.device} aria-label="Application de réservation (démo interactive)">
-          <div className={s.phone}>
-            <BookingApp />
+      <div className={s.layout}>
+        <div className={s.col}>
+          <section className={s.intro}>
+            <p className={s.lead} data-r>Barbier à Paris 11e. Coupes aux ciseaux, dégradés, barbe et rasage à l&apos;ancienne. Sans attente : on réserve son créneau en ligne et on arrive à l&apos;heure.</p>
+            <dl className={s.facts} data-r>
+              <div><dt>Adresse</dt><dd>8 passage Imaginaire, 75011 Paris</dd></div>
+              <div><dt>Horaires</dt><dd>Mardi au samedi, 10 h – 20 h</dd></div>
+              <div><dt>Paiement</dt><dd>Sur place, carte ou espèces</dd></div>
+            </dl>
+          </section>
+
+          <section className={s.carte} aria-labelledby="carte-t">
+            <h2 id="carte-t" className={s.h2} data-r>La carte</h2>
+            <ul className={s.prices}>
+              {services.map((x, i) => (
+                <li key={x.id} data-r style={{ ["--d" as string]: `${i * 0.05}s` }}>
+                  <div><b>{x.name}</b><span>{x.desc}</span></div>
+                  <span className={s.dur}>{x.min} min</span>
+                  <span className={s.eur}>{x.price} €</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className={s.salon} aria-labelledby="salon-t">
+            <h2 id="salon-t" className={s.h2} data-r>Le salon</h2>
+            <div className={s.salonGrid}>
+              <figure data-r><Image src="/d/coupe-franche/salon.jpg" alt="Fauteuils et miroirs du salon, murs de briques" fill sizes="(max-width:900px) 100vw, 40vw" /></figure>
+              <figure data-r style={{ ["--d" as string]: ".08s" }}><Image src="/d/coupe-franche/outils.jpg" alt="Tondeuses, ciseaux et peigne posés sur le comptoir" fill sizes="(max-width:900px) 50vw, 20vw" /></figure>
+              <figure data-r style={{ ["--d" as string]: ".16s" }}><Image src="/d/coupe-franche/fauteuil.jpg" alt="Fauteuil de barbier en cuir" fill sizes="(max-width:900px) 50vw, 20vw" /></figure>
+            </div>
+          </section>
+        </div>
+
+        <aside className={s.device} aria-label="Réserver un créneau (application de démonstration)">
+          <div className={s.sticky}>
+            <p className={s.devTitle}>Réserver un créneau</p>
+            <div className={s.phone}><BookingApp /></div>
+            <p className={s.note}>L&apos;application fonctionne : choisis une prestation et va jusqu&apos;au bout. Démo, aucune réservation n&apos;est envoyée.</p>
           </div>
-        </section>
+        </aside>
       </div>
-      <footer className={s.foot}>Photos : Unsplash · Démo réalisée par Au Pixel Près · Coupe Franche est une marque imaginaire</footer>
+
+      <footer className={s.foot}>Coupe Franche est une marque imaginaire · photos Unsplash · site et application conçus par Au Pixel Près</footer>
     </div>
   );
 }

@@ -64,7 +64,7 @@ export function Dashboard() {
       <main className={s.main}>
         <header className={s.topbar}>
           <div>
-            <h1 className={s.hello}>{view === "dash" ? "Bonjour Inès 👋" : view === "planning" ? "Planning de la semaine" : "Clients"}</h1>
+            <h1 className={s.hello}>{view === "dash" ? "Bonjour Inès" : view === "planning" ? "Planning de la semaine" : "Clients"}</h1>
             <p className={s.date} suppressHydrationWarning>{date}</p>
           </div>
           <button className={s.primary} onClick={() => setModal(true)}>+ Nouvelle séance</button>
@@ -89,7 +89,7 @@ export function Dashboard() {
               </article>
               <article className={s.card}>
                 <div className={s.cardHead}><div><h2>Aujourd&apos;hui</h2><p className={s.muted}>{agenda.length} séance{agenda.length > 1 ? "s" : ""}</p></div></div>
-                {agenda.length === 0 ? <p className={s.empty}>Pas de séance aujourd&apos;hui. Jour de repos 😴</p> : (
+                {agenda.length === 0 ? <p className={s.empty}>Pas de séance aujourd&apos;hui.</p> : (
                   <ul className={s.agenda}>
                     {agenda.map((x) => (
                       <li key={x.id} className={x.status === "cancel" ? s.cancelled : ""}>

@@ -60,7 +60,7 @@ export function BookingApp() {
         <div key={step} className={s.screen} style={{ ["--dir" as string]: dir }}>
           {step === 0 && (
             <div className={s.home}>
-              <div className={s.homeImg}><Image src="/demos/coupe-franche/salon.jpg" alt="Intérieur du salon de barbier, fauteuils et briques" fill sizes="400px" priority /></div>
+              <div className={s.homeImg}><Image src="/d/coupe-franche/salon.jpg" alt="Intérieur du salon de barbier, fauteuils et briques" fill sizes="400px" priority /></div>
               <div className={s.homeIn}>
                 <div className={s.pole} aria-hidden="true" />
                 <h2 className={s.brand}>Coupe<br />Franche</h2>

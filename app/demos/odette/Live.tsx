@@ -12,153 +12,130 @@ function useNow() {
   return now;
 }
 
-/** Pastille « Ouvert · ferme à 19 h 30 » calculée en direct. */
-export function OpenPill() {
+const dur = (h: number) => { const m = Math.round(h * 60); return m >= 60 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}` : `${m} min`; };
+
+/** « Ouvert jusqu'à 19 h 30 » / « Fermé · ouvre demain à 6 h 30 », calculé en direct. */
+export function OpenStatus() {
   const now = useNow();
-  if (!now) return <span className={s.pill}>Horaires</span>;
+  if (!now) return <span className={s.open}>Du mardi au dimanche</span>;
   const today = hours[now.day];
-  const open = !!today && now.h >= today[0] && now.h < today[1];
-  let text: string;
-  if (open) text = `Ouvert · ferme à ${fmtH(today![1])}`;
-  else {
-    let d = now.day, first = true;
-    for (let i = 0; i < 8; i++) {
-      const hh = hours[d];
-      if (hh && (!first || now.h < hh[0])) { text = `Fermé · ouvre ${i === 0 ? "à" : i === 1 ? "demain à" : `${dayNames[d].toLowerCase()} à`} ${fmtH(hh[0])}`; break; }
-      d = (d + 1) % 7; first = false;
-    }
-    text ??= "Fermé";
+  if (today && now.h >= today[0] && now.h < today[1]) return <span className={s.open}><i className={s.on} />Ouvert jusqu&apos;à {fmtH(today[1])}</span>;
+  let d = now.day, first = true;
+  for (let i = 0; i < 8; i++) {
+    const hh = hours[d];
+    if (hh && (!first || now.h < hh[0])) return <span className={s.open}><i />Fermé · ouvre {i === 0 ? "à" : i === 1 ? "demain à" : `${dayNames[d].toLowerCase()} à`} {fmtH(hh[0])}</span>;
+    d = (d + 1) % 7; first = false;
   }
-  return <span className={open ? `${s.pill} ${s.open}` : s.pill}><i />{text}</span>;
+  return <span className={s.open}>Fermé</span>;
 }
 
-/** Bandeau du hero : la prochaine fournée et le temps restant. */
-export function NextBatch() {
+/** Bandeau défilant : le programme du four aujourd'hui, avec ce qui est déjà sorti et la prochaine fournée. */
+export function OvenTicker() {
   const now = useNow();
-  if (!now) return <p className={s.next}>Fournées toute la journée, de 6 h 30 à 17 h 15.</p>;
-  const nb = batches.find((b) => b.h > now.h);
-  if (!nb || !hours[now.day]) return <p className={s.next}>Première fournée demain à {fmtH(batches[0].h)} : {batches[0].label.toLowerCase()}.</p>;
-  const mins = Math.round((nb.h - now.h) * 60);
+  const next = now && hours[now.day] ? batches.find((b) => b.h > now.h) : null;
+  const lead = next && now ? `Prochaine fournée dans ${dur(next.h - now.h)} : ${next.label.toLowerCase()}` : "Le four tourne de 6 h 30 à 17 h 15";
+  const line = [lead, ...batches.map((b) => `${fmtH(b.h)} · ${b.label.toLowerCase()}${now && b.h <= now.h ? " (sorti)" : ""}`)];
   return (
-    <p className={s.next}>
-      <span className={s.oven} aria-hidden="true" />
-      Prochaine fournée : <b>{nb.label}</b> à {fmtH(nb.h)} <span className={s.soon}>dans {mins >= 60 ? `${Math.floor(mins / 60)} h ${String(mins % 60).padStart(2, "0")}` : `${mins} min`}</span>
-    </p>
+    <div className={s.ticker} role="marquee" aria-label={line.join(", ")}>
+      <div className={s.tickerIn} aria-hidden="true">
+        {[0, 1].map((k) => <span key={k}>{line.map((x, i) => <b key={i} className={i === 0 ? s.tickLead : ""}>{x}</b>)}</span>)}
+      </div>
+    </div>
   );
 }
 
-/** Frise des fournées : celles déjà sorties, la prochaine mise en avant, et l'heure actuelle.
- *  Les fournées sont espacées régulièrement ; la barre avance entre deux fournées selon l'heure. */
-export function Timeline() {
+/** Programme du four sous forme de liste (horaires de la journée). */
+export function OvenList() {
   const now = useNow();
-  const n = batches.length, pos = (i: number) => (i / (n - 1)) * 100;
-  let fill: number | null = null;
-  if (now) {
-    if (now.h <= batches[0].h) fill = 0;
-    else if (now.h >= batches[n - 1].h) fill = 100;
-    else {
-      const i = batches.findIndex((b) => b.h > now.h) - 1;
-      fill = pos(i) + ((now.h - batches[i].h) / (batches[i + 1].h - batches[i].h)) * (pos(i + 1) - pos(i));
-    }
-  }
   const nextIdx = now ? batches.findIndex((b) => b.h > now.h) : -1;
   return (
-    <div className={s.tl}>
-      <div className={s.tlLine}>
-        {fill !== null && <div className={s.tlFill} style={{ width: `${fill}%` }} />}
-        {fill !== null && fill > 0 && fill < 100 && <span className={s.tlNow} style={{ left: `${fill}%` }}>Maintenant</span>}
-      </div>
-      <ol className={s.tlList}>
-        {batches.map((b, i) => {
-          const state = !now ? "" : b.h <= now.h ? s.done : i === nextIdx ? s.nextB : "";
-          return (
-            <li key={b.h} className={state} style={{ left: `${pos(i)}%`, ["--d" as string]: `${i * 0.08}s` }} data-r>
-              <span className={s.tlDot} />
-              <b>{fmtH(b.h)}</b>
-              <span>{b.label}</span>
-              {state === s.done && <em>Sorti du four</em>}
-              {state === s.nextB && <em>Prochaine</em>}
-            </li>
-          );
-        })}
-      </ol>
-    </div>
+    <ol className={s.oven}>
+      {batches.map((b, i) => {
+        const done = now ? b.h <= now.h : false;
+        return (
+          <li key={b.h} className={done ? s.ovenDone : i === nextIdx ? s.ovenNext : ""} data-r style={{ ["--d" as string]: `${i * 0.06}s` }}>
+            <time>{fmtH(b.h)}</time>
+            <span>{b.label}</span>
+            <em>{done ? "sorti du four" : i === nextIdx ? `dans ${dur(b.h - now!.h)}` : ""}</em>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
 type Line = { p: Product; q: number };
 
-/** Carte + panier « click & collect » (commande fictive : rien n'est envoyé). */
+/** Le comptoir + le sac « à emporter » (commande fictive : rien n'est envoyé). */
 export function Shop() {
   const cats = ["Pains", "Viennoiseries", "Douceurs"] as const;
-  const [cat, setCat] = useState<(typeof cats)[number]>("Pains");
+  const [cat, setCat] = useState<(typeof cats)[number] | "Tout">("Tout");
   const [cart, setCart] = useState<Record<string, number>>({});
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"cart" | "done">("cart");
   const [slot, setSlot] = useState("");
   const [name, setName] = useState("");
-  const [bump, setBump] = useState(0);
   const now = useNow();
 
   const lines: Line[] = useMemo(() => Object.entries(cart).filter(([, q]) => q > 0).map(([id, q]) => ({ p: products.find((p) => p.id === id)!, q })), [cart]);
   const count = lines.reduce((a, l) => a + l.q, 0), total = lines.reduce((a, l) => a + l.q * l.p.price, 0);
-  const add = (id: string, d = 1) => { setCart((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + d) })); if (d > 0) setBump((b) => b + 1); };
+  const add = (id: string, d = 1) => setCart((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + d) }));
 
-  // Créneaux de retrait : toutes les 30 min, à partir de 30 min après maintenant, dans les horaires du jour.
+  // Créneaux de retrait : toutes les 30 min, au plus tôt 30 min après maintenant, dans les horaires du jour.
   const slots = useMemo(() => {
     if (!now) return [];
     const hh = hours[now.day]; if (!hh) return [];
     const out: string[] = [];
-    for (let h = Math.ceil((now.h + 0.5) * 2) / 2; h <= hh[1] - 0.5; h += 0.5) out.push(fmtH(h));
-    return out.slice(0, 10);
+    for (let h = Math.ceil((Math.max(now.h, hh[0]) + 0.5) * 2) / 2; h <= hh[1] - 0.5; h += 0.5) out.push(fmtH(h));
+    return out.slice(0, 12);
   }, [now]);
 
   useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [open]);
+  const list = products.filter((p) => cat === "Tout" || p.cat === cat);
 
   return (
     <>
-      <div className={s.tabs} role="tablist" aria-label="Catégories">
-        {cats.map((c) => <button key={c} role="tab" aria-selected={cat === c} className={cat === c ? s.tabOn : s.tab} onClick={() => setCat(c)}>{c}</button>)}
+      <div className={s.filters} role="tablist" aria-label="Catégories">
+        {(["Tout", ...cats] as const).map((c) => (
+          <button key={c} role="tab" aria-selected={cat === c} className={cat === c ? s.fOn : s.f} onClick={() => setCat(c)}>
+            {c}<sup>{c === "Tout" ? products.length : products.filter((p) => p.cat === c).length}</sup>
+          </button>
+        ))}
       </div>
       <div className={s.grid}>
-        {products.filter((p) => p.cat === cat).map((p, i) => (
-          <article key={p.id} className={s.card} data-r style={{ ["--d" as string]: `${i * 0.08}s` }}>
-            <div className={s.cardImg}>
-              <Image src={p.img} alt="" fill sizes="(max-width:700px) 90vw, 30vw" />
-              {p.tag && <span className={s.tag}>{p.tag}</span>}
+        {list.map((p, i) => (
+          <article key={p.id} className={s.item} data-r style={{ ["--d" as string]: `${(i % 4) * 0.06}s` }}>
+            <div className={s.itemImg}>
+              <Image src={p.img} alt={p.name} fill sizes="(max-width:700px) 90vw, (max-width:1100px) 45vw, 24vw" />
+              {p.tag && <span className={s.itemTag}>{p.tag}</span>}
             </div>
-            <div className={s.cardBody}>
-              <h3>{p.name}</h3>
-              <p>{p.desc}</p>
-              <div className={s.cardFoot}>
-                <span className={s.price}>{euro(p.price)}</span>
-                {cart[p.id] ? (
-                  <span className={s.qty}>
-                    <button onClick={() => add(p.id, -1)} aria-label={`Retirer un ${p.name}`}>−</button>
-                    <b aria-live="polite">{cart[p.id]}</b>
-                    <button onClick={() => add(p.id)} aria-label={`Ajouter un ${p.name}`}>+</button>
-                  </span>
-                ) : (
-                  <button className={s.add} onClick={() => add(p.id)}>Ajouter</button>
-                )}
-              </div>
-            </div>
+            <div className={s.itemRow}><h3>{p.name}</h3><span className={s.price}>{euro(p.price)}</span></div>
+            <p>{p.desc}</p>
+            {cart[p.id] ? (
+              <span className={s.qty}>
+                <button onClick={() => add(p.id, -1)} aria-label={`Retirer : ${p.name}`}>−</button>
+                <b aria-live="polite">{cart[p.id]} dans le sac</b>
+                <button onClick={() => add(p.id)} aria-label={`Ajouter : ${p.name}`}>+</button>
+              </span>
+            ) : (
+              <button className={s.add} onClick={() => add(p.id)}>Ajouter au sac</button>
+            )}
           </article>
         ))}
       </div>
 
       {count > 0 && !open && (
-        <button key={bump} className={s.fab} onClick={() => { setOpen(true); setStep("cart"); }}>
-          <span>Mon panier · {count} article{count > 1 ? "s" : ""}</span><b>{euro(total)}</b>
+        <button className={s.bag} onClick={() => { setOpen(true); setStep("cart"); }}>
+          <span>Mon sac · {count}</span><b>{euro(total)}</b>
         </button>
       )}
 
       {open && (
         <div className={s.drawerWrap} onClick={(e) => e.target === e.currentTarget && setOpen(false)}>
-          <aside className={s.drawer} role="dialog" aria-modal="true" aria-label="Panier">
+          <aside className={s.drawer} role="dialog" aria-modal="true" aria-label="Commande à emporter">
             <div className={s.dHead}>
-              <h3>{step === "cart" ? "À emporter" : "C'est commandé"}</h3>
-              <button onClick={() => setOpen(false)} aria-label="Fermer">✕</button>
+              <h3>{step === "cart" ? "À emporter" : "C'est noté"}</h3>
+              <button onClick={() => setOpen(false)}>Fermer</button>
             </div>
             {step === "cart" ? (
               <form className={s.dBody} onSubmit={(e) => { e.preventDefault(); if (slot && name.trim()) setStep("done"); }}>
@@ -166,29 +143,29 @@ export function Shop() {
                   {lines.map((l) => (
                     <li key={l.p.id}>
                       <span>{l.p.name}</span>
-                      <span className={s.qty}><button type="button" onClick={() => add(l.p.id, -1)} aria-label="Retirer">−</button><b>{l.q}</b><button type="button" onClick={() => add(l.p.id)} aria-label="Ajouter">+</button></span>
+                      <span className={s.qtyS}><button type="button" onClick={() => add(l.p.id, -1)} aria-label="Retirer">−</button><b>{l.q}</b><button type="button" onClick={() => add(l.p.id)} aria-label="Ajouter">+</button></span>
                       <b>{euro(l.q * l.p.price)}</b>
                     </li>
                   ))}
                 </ul>
                 <p className={s.total}><span>Total</span><b>{euro(total)}</b></p>
                 <fieldset className={s.slots}>
-                  <legend>Heure de retrait (aujourd&apos;hui)</legend>
+                  <legend>Je passe le chercher à</legend>
                   {slots.length ? slots.map((t) => (
                     <label key={t} className={slot === t ? s.slotOn : s.slot}><input type="radio" name="slot" value={t} checked={slot === t} onChange={() => setSlot(t)} />{t}</label>
-                  )) : <p className={s.muted}>La boutique est fermée : dans la vraie version, on proposerait les créneaux de demain.</p>}
+                  )) : <p className={s.muted}>La boutique est fermée. Dans la version en ligne, on propose les créneaux du lendemain.</p>}
                 </fieldset>
-                <label className={s.field}>Prénom<input value={name} onChange={(e) => setName(e.target.value)} placeholder="Camille" autoComplete="given-name" /></label>
-                <button className={s.pay} disabled={!slot || !name.trim()}>Réserver · paiement sur place</button>
-                <p className={s.muted}>Démo : aucune commande n&apos;est réellement envoyée.</p>
+                <label className={s.field}>Au nom de<input value={name} onChange={(e) => setName(e.target.value)} placeholder="Prénom" autoComplete="given-name" /></label>
+                <button className={s.pay} disabled={!slot || !name.trim()}>Réserver · je paie sur place</button>
+                <p className={s.muted}>Démo : la commande n&apos;est envoyée à personne.</p>
               </form>
             ) : (
               <div className={s.dBody}>
-                <div className={s.ok} aria-hidden="true">✓</div>
-                <p className={s.okT}>Merci {name.trim()} !</p>
-                <p className={s.muted}>Ta commande n° {String(1000 + count * 37 + Math.round(total * 10)).slice(-4)} t&apos;attend à <b>{slot}</b>. Tu paies sur place.</p>
+                <p className={s.okT}>Merci {name.trim()}.</p>
+                <p>Votre sac sera prêt à <b>{slot}</b>. Vous réglez au comptoir.</p>
                 <ul className={s.lines}>{lines.map((l) => <li key={l.p.id}><span>{l.q} × {l.p.name}</span><b>{euro(l.q * l.p.price)}</b></li>)}</ul>
-                <button className={s.pay} onClick={() => { setCart({}); setOpen(false); setSlot(""); }}>Terminer</button>
+                <p className={s.total}><span>À régler</span><b>{euro(total)}</b></p>
+                <button className={s.pay} onClick={() => { setCart({}); setOpen(false); setSlot(""); }}>Fermer</button>
               </div>
             )}
           </aside>
@@ -198,18 +175,19 @@ export function Shop() {
   );
 }
 
-/** Tableau des horaires avec le jour actuel mis en avant. */
+/** Horaires, jour actuel mis en avant. */
 export function Hours() {
   const now = useNow();
-  const order = [1, 2, 3, 4, 5, 6, 0];
   return (
-    <ul className={s.hours}>
-      {order.map((d) => (
-        <li key={d} className={now?.day === d ? s.today : ""}>
-          <span>{dayNames[d]}</span>
-          <span>{hours[d] ? `${fmtH(hours[d]![0])} – ${fmtH(hours[d]![1])}` : "Fermé"}</span>
-        </li>
-      ))}
-    </ul>
+    <table className={s.hours}>
+      <tbody>
+        {[1, 2, 3, 4, 5, 6, 0].map((d) => (
+          <tr key={d} className={now?.day === d ? s.today : ""}>
+            <th scope="row">{dayNames[d]}</th>
+            <td>{hours[d] ? `${fmtH(hours[d]![0])} – ${fmtH(hours[d]![1])}` : "Fermé"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
